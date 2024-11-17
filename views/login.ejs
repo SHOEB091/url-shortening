@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+      }
+
+      h1 {
+        color: #333;
+        margin-bottom: 20px;
+      }
+
+      form {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 300px;
+      }
+
+      label {
+        font-size: 16px;
+        color: #333;
+        margin-bottom: 10px;
+        align-self: flex-start;
+      }
+
+      input[type="text"], 
+      input[type="password"] {
+        padding: 10px;
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+
+      button {
+        background-color: #00796b;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin: 10px;
+      }
+
+      button:hover {
+        background-color: #004d40;
+      }
+
+      .button-group {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+      }
+
+      a {
+        text-decoration: none;
+        color: #00796b;
+        font-size: 14px;
+        margin-top: 10px;
+        transition: color 0.3s ease;
+      }
+
+      a:hover {
+        color: #004d40;
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+  </head>
+  <body>
+    <h1>Login</h1>
+    <form action="/user/login" method="post">
+      <label for="email">Email</label>
+      <input type="text" id="email" required name="email" placeholder="Enter your email" />
+      <label for="password">Password</label>
+      <input type="password" id="password" required name="password" placeholder="Enter your password" />
+
+      <div class="button-group">
+        <button type="submit">Login</button>
+        <button type="button" onclick="window.location.href='/signup'">Signup</button>
+      </div>
+    </form>
+  </body>
+</html>

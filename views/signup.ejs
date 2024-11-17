@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+      }
+
+      h1 {
+        color: #333;
+        margin-bottom: 20px;
+      }
+
+      form {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 300px;
+      }
+
+      label {
+        font-size: 16px;
+        color: #333;
+        margin-bottom: 10px;
+        align-self: flex-start;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="password"] {
+        padding: 10px;
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+
+      button {
+        background-color: #00796b;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #004d40;
+      }
+
+      a {
+        text-decoration: none;
+        color: #00796b;
+        font-size: 14px;
+        margin-top: 10px;
+        transition: color 0.3s ease;
+      }
+
+      a:hover {
+        color: #004d40;
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signup</title>
+  </head>
+  <body>
+    <h1>Signup</h1>
+    <form action="/user/signup" method="post">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" required name="name" placeholder="Enter your full name" />
+      
+      <label for="username">Username</label>
+      <input type="text" id="username" required name="username" placeholder="Choose a username" />
+      
+      <label for="email">Email</label>
+      <input type="email" id="email" required name="email" placeholder="Enter your email" />
+      
+      <label for="password">Password</label>
+      <input type="password" id="password" required name="password" placeholder="Enter your password" />
+
+      <button type="submit">Signup</button>
+    </form>
+    <a href="/login">Already have an account? Login</a>
+  </body>
+</html>
