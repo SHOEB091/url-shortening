@@ -1,153 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <style>
-      body {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-      }
-
-      h1 {
-        color: #333;
-        margin-bottom: 20px;
-      }
-
-      p {
-        background-color: #e0f7fa;
-        border: 1px solid #b2ebf2;
-        padding: 15px;
-        border-radius: 5px;
-        color: #00796b;
-        width: fit-content;
-        text-align: center;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      }
-
-      form {
-        background-color: #ffffff;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 300px;
-        margin-bottom: 20px;
-      }
-
-      label {
-        font-size: 16px;
-        color: #333;
-        margin-bottom: 10px;
-      }
-
-      input[type="text"] {
-        padding: 10px;
-        width: 100%;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        margin-bottom: 20px;
-      }
-
-      button {
-        background-color: #00796b;
-        color: #fff;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-      }
-
-      button:hover {
-        background-color: #004d40;
-      }
-
-      .logout-btn {
-        margin-top: 20px;
-      }
-
-      table {
-        margin-top: 30px;
-        width: 90%;
-        border-collapse: collapse;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      }
-
-      th,
-      td {
-        padding: 15px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
-      }
-
-      th {
-        background-color: #00796b;
-        color: #fff;
-      }
-
-      tr:nth-child(even) {
-        background-color: #f2f2f2;
-      }
-
-      tr:hover {
-        background-color: #f1f1f1;
-      }
-    </style>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home Page</title>
+    <title>ShortLink - URL Shortener</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body>
-    <h1>URL Shortener</h1>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+      <span class="size-1 pos-1 delay-1 duration-1"></span>
+      <span class="size-2 pos-2 delay-2 duration-2"></span>
+      <span class="size-3 pos-3 delay-3 duration-3"></span>
+      <span class="size-4 pos-4 delay-4 duration-4"></span>
+      <span class="size-5 pos-5 delay-5 duration-5"></span>
+      <span class="size-1 pos-6 delay-6 duration-6"></span>
+      <span class="size-2 pos-7 delay-7 duration-5"></span>
+      <span class="size-3 pos-8 delay-8 duration-4"></span>
+      <span class="size-4 pos-9 delay-9 duration-3"></span>
+      <span class="size-5 pos-1 delay-2 duration-2"></span>
+      <span class="size-1 pos-3 delay-4 duration-1"></span>
+      <span class="size-2 pos-5 delay-6 duration-6"></span>
+      <span class="size-3 pos-7 delay-8 duration-5"></span>
+      <span class="size-4 pos-9 delay-1 duration-4"></span>
+      <span class="size-5 pos-2 delay-3 duration-3"></span>
+    </div>
 
-    <% if (id) { %>
-    <p>URL Generated: <a href="http://localhost:3000/url/<%= id %>" target="_blank">http://localhost:3000/url/<%= id %></a></p>
-    <% } %>
-    <form method="POST" action="/url">
-      <label for="url">Enter Your Original URL</label>
-      <input
-        type="text"
-        id="url"
-        name="url"
-        placeholder="https://example.com"
-        required
-      />
-      <button type="submit">Generate</button>
-    </form>
-    <form action="/user/logout" method="get">
-      <button type="submit" class="logout-btn">Logout</button>
-    </form>
+    <div class="container">
+      <!-- Navigation -->
+      <nav class="navbar">
+        <a href="/" class="logo">Short<span>Link</span></a>
+        <form action="/user/logout" method="get">
+          <button type="submit" class="btn btn-secondary">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </button>
+        </form>
+      </nav>
 
-    <% if (urls && urls.length > 0) { %>
-    <table>
-      <thead>
-        <tr>
-          <th>S. No</th>
-          <th>ShortID</th>
-          <th>Redirect URL</th>
-          <th>Clicks</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% urls.forEach((url, index) => { %>
-        <tr>
-          <td><%= index + 1 %></td>
-          <td><a href="/url/<%= url.shortId %>" target="_blank"><%= url.shortId %></a></td>
-          <td><%= url.redirectURL %></td>
-          <td><%= url.visitHistory.length %></td>
-        </tr>
-        <% }) %>
-      </tbody>
-    </table>
-    <% } %>
+      <div class="main-wrapper">
+        <!-- Main Content -->
+        <div class="card">
+          <div class="card-header">
+            <h1 class="card-title">URL Shortener</h1>
+            <p class="card-subtitle">Shorten any URL with just one click</p>
+          </div>
+
+          <% if (id) { %>
+          <div class="url-result mb-3">
+            <p>URL Generated:</p>
+            <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+              <a href="/<%= id %>" id="shortUrl" target="_blank"><%= typeof baseUrl !== 'undefined' ? baseUrl : 'http://localhost:3000' %>/<%= id %></a>
+              <button onclick="copyToClipboard()" class="copy-btn" id="copyBtn" title="Copy to clipboard">
+                <i class="fas fa-copy"></i>
+              </button>
+            </div>
+          </div>
+          <% } %>
+
+          <form id="urlForm" method="POST" action="/url" novalidate>
+            <div class="form-group">
+              <label for="url" class="form-label">Enter Your Original URL</label>
+              <input
+                type="url"
+                id="url"
+                name="url"
+                class="form-control"
+                placeholder="https://example.com"
+                required
+                pattern="https?://.+"
+              />
+              <div class="form-error" id="urlError"></div>
+            </div>
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-link"></i> Generate Short URL
+            </button>
+          </form>
+        </div>
+
+        <% if (urls && urls.length > 0) { %>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Short URL</th>
+                  <th>Original URL</th>
+                  <th>Clicks</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% urls.forEach((url, index) => { %>
+                <tr>
+                  <td><%= index + 1 %></td>
+                  <td>
+                    <a href="/<%= url.shortId %>" class="table-link" target="_blank">
+                      <%= url.shortId %>
+                    </a>
+                  </td>
+                  <td>
+                    <div style="max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                      <%= url.redirectURL %>
+                    </div>
+                  </td>
+                  <td><span class="badge"><%= url.visitHistory.length %></span></td>
+                </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+        <% } %>
+      </div>
+
+      <footer class="footer">
+        <p>© <%= new Date().getFullYear() %> ShortLink. All rights reserved.</p>
+      </footer>
+    </div>
+
+    <script>
+      // Copy to clipboard functionality
+      function copyToClipboard() {
+        const shortUrl = document.getElementById('shortUrl').textContent;
+        navigator.clipboard.writeText(shortUrl).then(() => {
+          const copyBtn = document.getElementById('copyBtn');
+          copyBtn.innerHTML = '<i class="fas fa-check"></i>';
+          copyBtn.classList.add('copy-success');
+          setTimeout(() => {
+            copyBtn.innerHTML = '<i class="fas fa-copy"></i>';
+            copyBtn.classList.remove('copy-success');
+          }, 2000);
+        });
+      }
+
+      // Additional animations for buttons
+      document.querySelectorAll('.btn').forEach(button => {
+        button.addEventListener('mouseenter', e => {
+          let x = e.clientX - e.target.getBoundingClientRect().left;
+          let y = e.clientY - e.target.getBoundingClientRect().top;
+          
+          let ripple = document.createElement('span');
+          ripple.style.left = `${x}px`;
+          ripple.style.top = `${y}px`;
+          ripple.classList.add('ripple');
+          
+          e.target.appendChild(ripple);
+          
+          setTimeout(() => {
+            ripple.remove();
+          }, 600);
+        });
+      });
+      
+      // URL form validation
+      document.addEventListener('DOMContentLoaded', function() {
+        const urlForm = document.getElementById('urlForm');
+        const urlInput = document.getElementById('url');
+        const urlError = document.getElementById('urlError');
+        
+        if (urlForm) {
+          urlForm.addEventListener('submit', function(event) {
+            if (!validateUrl(urlInput.value)) {
+              event.preventDefault();
+              urlError.textContent = 'Please enter a valid URL (e.g., https://example.com)';
+              urlInput.classList.add('invalid');
+              urlInput.classList.remove('valid');
+              
+              // Add shake animation
+              urlInput.classList.add('shake');
+              setTimeout(() => {
+                urlInput.classList.remove('shake');
+              }, 500);
+            }
+          });
+          
+          urlInput.addEventListener('input', function() {
+            if (validateUrl(this.value)) {
+              urlError.textContent = '';
+              this.classList.add('valid');
+              this.classList.remove('invalid');
+            } else if (this.value) {
+              urlError.textContent = 'Please enter a valid URL (e.g., https://example.com)';
+              this.classList.add('invalid');
+              this.classList.remove('valid');
+            } else {
+              urlError.textContent = '';
+              this.classList.remove('valid', 'invalid');
+            }
+          });
+        }
+        
+        // URL validation helper
+        function validateUrl(url) {
+          try {
+            new URL(url);
+            return url.startsWith('http://') || url.startsWith('https://');
+          } catch (e) {
+            return false;
+          }
+        }
+      });
+    </script>
   </body>
 </html>

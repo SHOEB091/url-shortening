@@ -16,10 +16,14 @@ async function handleGenerateNewShortURL(req, res) {
     });
 
     const userUrls = await URL.find({ createdBy: req.user._id });
+    
+    // Pass the base URL from environment variables
+    const baseUrl = process.env.BASE_URL || "http://localhost:3000";
 
     return res.render("home", {
       id: shortID, // Pass the generated short ID
       urls: userUrls, // Pass the user's URLs
+      baseUrl: baseUrl // Pass the base URL
     });
   } catch (error) {
     console.error("Error generating short URL:", error);

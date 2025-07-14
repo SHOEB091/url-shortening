@@ -1,100 +1,346 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <style>
-      body {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-      }
-
-      h1 {
-        color: #333;
-        margin-bottom: 20px;
-      }
-
-      form {
-        background-color: #ffffff;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 300px;
-      }
-
-      label {
-        font-size: 16px;
-        color: #333;
-        margin-bottom: 10px;
-        align-self: flex-start;
-      }
-
-      input[type="text"],
-      input[type="email"],
-      input[type="password"] {
-        padding: 10px;
-        width: 100%;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        margin-bottom: 20px;
-      }
-
-      button {
-        background-color: #00796b;
-        color: #fff;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-      }
-
-      button:hover {
-        background-color: #004d40;
-      }
-
-      a {
-        text-decoration: none;
-        color: #00796b;
-        font-size: 14px;
-        margin-top: 10px;
-        transition: color 0.3s ease;
-      }
-
-      a:hover {
-        color: #004d40;
-      }
-    </style>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Signup</title>
+    <title>Sign Up - ShortLink</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body>
-    <h1>Signup</h1>
-    <form action="/user/signup" method="post">
-      <label for="name">Full Name</label>
-      <input type="text" id="name" required name="name" placeholder="Enter your full name" />
-      
-      <label for="username">Username</label>
-      <input type="text" id="username" required name="username" placeholder="Choose a username" />
-      
-      <label for="email">Email</label>
-      <input type="email" id="email" required name="email" placeholder="Enter your email" />
-      
-      <label for="password">Password</label>
-      <input type="password" id="password" required name="password" placeholder="Enter your password" />
+    <!-- Animated Background -->
+    <div class="bg-animation">
+      <span class="size-1 pos-1 delay-1 duration-1"></span>
+      <span class="size-2 pos-2 delay-2 duration-2"></span>
+      <span class="size-3 pos-3 delay-3 duration-3"></span>
+      <span class="size-4 pos-4 delay-4 duration-4"></span>
+      <span class="size-5 pos-5 delay-5 duration-5"></span>
+      <span class="size-1 pos-6 delay-6 duration-6"></span>
+      <span class="size-2 pos-7 delay-7 duration-5"></span>
+      <span class="size-3 pos-8 delay-8 duration-4"></span>
+      <span class="size-4 pos-9 delay-9 duration-3"></span>
+      <span class="size-5 pos-1 delay-2 duration-2"></span>
+      <span class="size-1 pos-3 delay-4 duration-1"></span>
+      <span class="size-2 pos-5 delay-6 duration-6"></span>
+      <span class="size-3 pos-7 delay-8 duration-5"></span>
+      <span class="size-4 pos-9 delay-1 duration-4"></span>
+      <span class="size-5 pos-2 delay-3 duration-3"></span>
+    </div>
 
-      <button type="submit">Signup</button>
-    </form>
-    <a href="/login">Already have an account? Login</a>
+    <div class="container">
+      <div class="main-wrapper auth-page">
+        <div class="card">
+          <div class="card-header">
+            <h1 class="card-title">Sign Up</h1>
+            <p class="card-subtitle">Create your ShortLink account</p>
+          </div>
+
+          <% if (error) { %>
+            <div class="error-message mb-3">
+              <%= error %>
+            </div>
+          <% } %>
+
+          <form id="signupForm" action="/user/signup" method="post" novalidate>
+            <div class="form-group">
+              <label for="name" class="form-label">Full Name</label>
+              <input 
+                type="text" 
+                id="name" 
+                required 
+                name="name" 
+                class="form-control" 
+                placeholder="Enter your full name"
+                minlength="2"
+                maxlength="50"
+              />
+              <div class="form-error" id="nameError"></div>
+            </div>
+            
+            <div class="form-group">
+              <label for="username" class="form-label">Username</label>
+              <input 
+                type="text" 
+                id="username" 
+                required 
+                name="username" 
+                class="form-control" 
+                placeholder="Choose a username"
+                minlength="3"
+                maxlength="20"
+                pattern="^[a-zA-Z0-9_]+$"
+              />
+              <div class="form-error" id="usernameError"></div>
+            </div>
+            
+            <div class="form-group">
+              <label for="email" class="form-label">Email</label>
+              <input 
+                type="email" 
+                id="email" 
+                required 
+                name="email" 
+                class="form-control" 
+                placeholder="Enter your email"
+                pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
+              />
+              <div class="form-error" id="emailError"></div>
+            </div>
+            
+            <div class="form-group">
+              <label for="password" class="form-label">Password</label>
+              <input 
+                type="password" 
+                id="password" 
+                required 
+                name="password" 
+                class="form-control" 
+                placeholder="Enter your password"
+                minlength="6"
+              />
+              <div class="form-error" id="passwordError"></div>
+              <div class="password-strength" id="passwordStrength"></div>
+            </div>
+
+            <button type="submit" class="btn btn-primary mb-3">
+              <i class="fas fa-user-plus"></i> Sign Up
+            </button>
+            
+            <div class="auth-links">
+              <p>Already have an account? <a href="/login">Login</a></p>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <p>© <%= new Date().getFullYear() %> ShortLink. All rights reserved.</p>
+      </footer>
+    </div>
+
+    <script>
+      // Animation for form elements
+      document.addEventListener('DOMContentLoaded', function() {
+        // Form animations
+        const formElements = document.querySelectorAll('.form-control');
+        formElements.forEach((element, index) => {
+          element.style.opacity = '0';
+          element.style.transform = 'translateY(20px)';
+          element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+          setTimeout(() => {
+            element.style.opacity = '1';
+            element.style.transform = 'translateY(0)';
+          }, 100 * (index + 1));
+        });
+        
+        // Form validation
+        const signupForm = document.getElementById('signupForm');
+        const nameInput = document.getElementById('name');
+        const usernameInput = document.getElementById('username');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const nameError = document.getElementById('nameError');
+        const usernameError = document.getElementById('usernameError');
+        const emailError = document.getElementById('emailError');
+        const passwordError = document.getElementById('passwordError');
+        const passwordStrength = document.getElementById('passwordStrength');
+        
+        signupForm.addEventListener('submit', function(event) {
+          let valid = true;
+          
+          // Clear previous errors
+          nameError.textContent = '';
+          usernameError.textContent = '';
+          emailError.textContent = '';
+          passwordError.textContent = '';
+          
+          // Name validation
+          if (!nameInput.value) {
+            nameError.textContent = 'Full name is required';
+            valid = false;
+          } else if (nameInput.value.length < 2) {
+            nameError.textContent = 'Name must be at least 2 characters';
+            valid = false;
+          }
+          
+          // Username validation
+          if (!usernameInput.value) {
+            usernameError.textContent = 'Username is required';
+            valid = false;
+          } else if (usernameInput.value.length < 3) {
+            usernameError.textContent = 'Username must be at least 3 characters';
+            valid = false;
+          } else if (!/^[a-zA-Z0-9_]+$/.test(usernameInput.value)) {
+            usernameError.textContent = 'Username can only contain letters, numbers, and underscores';
+            valid = false;
+          }
+          
+          // Email validation
+          if (!emailInput.value) {
+            emailError.textContent = 'Email is required';
+            valid = false;
+          } else if (!validateEmail(emailInput.value)) {
+            emailError.textContent = 'Please enter a valid email address';
+            valid = false;
+          }
+          
+          // Password validation
+          if (!passwordInput.value) {
+            passwordError.textContent = 'Password is required';
+            valid = false;
+          } else if (passwordInput.value.length < 6) {
+            passwordError.textContent = 'Password must be at least 6 characters';
+            valid = false;
+          } else if (!hasStrongPassword(passwordInput.value)) {
+            passwordError.textContent = 'Password should include uppercase, lowercase, number, and special character';
+            valid = false;
+          }
+          
+          if (!valid) {
+            event.preventDefault();
+            
+            // Add shake animation to invalid fields
+            const invalidFields = document.querySelectorAll('.form-control:invalid');
+            invalidFields.forEach(field => {
+              field.classList.add('shake');
+              setTimeout(() => {
+                field.classList.remove('shake');
+              }, 500);
+            });
+          }
+        });
+        
+        // Live validation
+        nameInput.addEventListener('input', validateName);
+        usernameInput.addEventListener('input', validateUsername);
+        emailInput.addEventListener('input', validateEmailField);
+        passwordInput.addEventListener('input', validatePasswordField);
+        
+        function validateName() {
+          if (nameInput.value && nameInput.value.length >= 2) {
+            nameError.textContent = '';
+            nameInput.classList.add('valid');
+            nameInput.classList.remove('invalid');
+          } else if (nameInput.value) {
+            nameError.textContent = 'Name must be at least 2 characters';
+            nameInput.classList.add('invalid');
+            nameInput.classList.remove('valid');
+          }
+        }
+        
+        function validateUsername() {
+          if (!usernameInput.value) {
+            usernameError.textContent = '';
+            usernameInput.classList.remove('valid', 'invalid');
+            return;
+          }
+          
+          if (usernameInput.value.length < 3) {
+            usernameError.textContent = 'Username must be at least 3 characters';
+            usernameInput.classList.add('invalid');
+            usernameInput.classList.remove('valid');
+            return;
+          }
+          
+          if (!/^[a-zA-Z0-9_]+$/.test(usernameInput.value)) {
+            usernameError.textContent = 'Username can only contain letters, numbers, and underscores';
+            usernameInput.classList.add('invalid');
+            usernameInput.classList.remove('valid');
+            return;
+          }
+          
+          usernameError.textContent = '';
+          usernameInput.classList.add('valid');
+          usernameInput.classList.remove('invalid');
+        }
+        
+        function validateEmailField() {
+          if (emailInput.value && validateEmail(emailInput.value)) {
+            emailError.textContent = '';
+            emailInput.classList.add('valid');
+            emailInput.classList.remove('invalid');
+          } else if (emailInput.value) {
+            emailError.textContent = 'Please enter a valid email address';
+            emailInput.classList.add('invalid');
+            emailInput.classList.remove('valid');
+          }
+        }
+        
+        function validatePasswordField() {
+          if (!passwordInput.value) {
+            passwordError.textContent = '';
+            passwordStrength.textContent = '';
+            passwordInput.classList.remove('valid', 'invalid');
+            return;
+          }
+          
+          // Check password strength
+          const strength = getPasswordStrength(passwordInput.value);
+          
+          if (passwordInput.value.length < 6) {
+            passwordError.textContent = 'Password must be at least 6 characters';
+            passwordInput.classList.add('invalid');
+            passwordInput.classList.remove('valid');
+          } else {
+            passwordError.textContent = '';
+            
+            if (strength === 'strong') {
+              passwordInput.classList.add('valid');
+              passwordInput.classList.remove('invalid');
+            } else if (strength === 'medium') {
+              passwordInput.classList.add('valid');
+              passwordInput.classList.remove('invalid');
+            } else {
+              passwordInput.classList.add('invalid');
+              passwordInput.classList.remove('valid');
+            }
+          }
+          
+          // Update password strength indicator
+          passwordStrength.textContent = strength ? `Password strength: ${strength}` : '';
+          passwordStrength.className = 'password-strength ' + strength;
+        }
+        
+        // Helper functions
+        function validateEmail(email) {
+          const re = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
+          return re.test(String(email).toLowerCase());
+        }
+        
+        function hasStrongPassword(password) {
+          // Check for at least one uppercase, one lowercase, one number, and one special character
+          const hasUppercase = /[A-Z]/.test(password);
+          const hasLowercase = /[a-z]/.test(password);
+          const hasNumber = /[0-9]/.test(password);
+          const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+          
+          return (hasUppercase && hasLowercase && hasNumber) || 
+                 (hasUppercase && hasLowercase && hasSpecialChar) || 
+                 (hasLowercase && hasNumber && hasSpecialChar);
+        }
+        
+        function getPasswordStrength(password) {
+          if (password.length < 6) return 'weak';
+          
+          const hasUppercase = /[A-Z]/.test(password);
+          const hasLowercase = /[a-z]/.test(password);
+          const hasNumber = /[0-9]/.test(password);
+          const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+          
+          let score = 0;
+          if (password.length >= 8) score++;
+          if (password.length >= 10) score++;
+          if (hasUppercase) score++;
+          if (hasLowercase) score++;
+          if (hasNumber) score++;
+          if (hasSpecialChar) score++;
+          
+          if (score >= 5) return 'strong';
+          if (score >= 3) return 'medium';
+          return 'weak';
+        }
+      });
+    </script>
   </body>
 </html>

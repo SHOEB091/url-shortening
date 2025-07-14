@@ -15,7 +15,7 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^6.9.0",
-    "nanoid": "^4.0.0",
+    "nanoid": "^3.3.4",
     "nodemon": "^3.1.4",
     "short-url": "file:",
     "shortid": "^2.2.16",
